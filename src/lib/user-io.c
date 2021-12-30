@@ -9,6 +9,9 @@
 /* Button on digital pin 12 port B */
 #define PORTB_BUTTON (1 << 4)
 
+/* Input digital signal from another Arduino pin 8 port B */
+#define PORTB_REMOTE 1
+
 /* Buzzer (digital pin 2) on port D */
 #define PORTD_BUZZER (1 << 2)
 
@@ -32,7 +35,7 @@ static uint8_t get_tracked_presses(const struct button_info* info);
 void init_led_button(void)
 {
 	/* Configure LED as output, buzzer as output, button as input */
-	DDRB = (DDRB | PORTB_LED) & (~PORTB_BUTTON);
+	DDRB = (DDRB | PORTB_LED) & (~PORTB_BUTTON) & (~PORTB_REMOTE);
 	DDRD |= PORTD_BUZZER;
 
 	/* Enable pullup on button */
@@ -207,3 +210,12 @@ uint8_t get_tracked_presses(const struct button_info* info)
 	return count;
 }
 
+/*
+ * Poll remote arduino until a logical HIGH is received
+ */
+void poll_remote_arduino(void) {
+	/* Wait for the button to be released */
+	while ((PINB & PORTB_REMOTE) == 0) {
+		/* Nothing */
+	}
+}

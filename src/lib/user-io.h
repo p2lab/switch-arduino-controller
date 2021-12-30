@@ -51,4 +51,9 @@ uint8_t delay(uint16_t led_on_time_ms, uint16_t led_off_time_ms,
  */
 void beep(void);
 
+/*
+ * Poll remote arduino until a logical HIGH is received
+ */
+void poll_remote_arduino(void);
+
 #endif
