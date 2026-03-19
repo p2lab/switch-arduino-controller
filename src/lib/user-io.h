@@ -51,4 +51,19 @@ uint8_t delay(uint16_t led_on_time_ms, uint16_t led_off_time_ms,
  */
 void beep(void);
 
+/* 
+* Switch ON / OFF external LEDR
+*/
+void switch_ledr(bool on);
+
+/* 
+* Switch ON / OFF external LEDG
+*/
+void switch_ledg(bool on);
+
+/* 
+* Switch ON / OFF external LEDY
+*/
+void switch_ledy(bool on);
+
 #endif

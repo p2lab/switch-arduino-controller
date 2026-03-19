@@ -22,8 +22,8 @@ void switch_controller(enum switch_mode mode)
 
 	SEND_BUTTON_SEQUENCE(
 		{ BT_NONE,		DP_BOTTOM,	SEQ_HOLD,	1  },	/* Switch Online button or News button (< v11) */
-		{ BT_NONE,		DP_RIGHT,	SEQ_MASH,	6  },	/* Sleep button */
-		{ BT_NONE,		DP_LEFT,	SEQ_MASH,	2  },	/* Controllers button */
+		{ BT_NONE,		DP_RIGHT,	SEQ_MASH,	8  },	/* Sleep button */
+		{ BT_NONE,		DP_LEFT,	SEQ_MASH,	3  },	/* Controllers button */
 		{ BT_A,			DP_NEUTRAL,	SEQ_HOLD,	1  },	/* Enter controllers settings */
 		{ BT_NONE,		DP_NEUTRAL,	SEQ_HOLD,	10 },	/* Wait for settings */
 

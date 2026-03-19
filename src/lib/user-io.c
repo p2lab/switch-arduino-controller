@@ -12,6 +12,10 @@
 /* Buzzer (digital pin 2) on port D */
 #define PORTD_BUZZER (1 << 2)
 
+#define PORTD_LEDR (1 << 3)
+#define PORTD_LEDG (1 << 4)
+#define PORTD_LEDY (1 << 5)
+
 /* Button minimum hold time (ms) -- avoid counting bounces as presses */
 #define BUTTON_HOLD_TIME_MS 20
 
@@ -33,7 +37,7 @@ void init_led_button(void)
 {
 	/* Configure LED as output, buzzer as output, button as input */
 	DDRB = (DDRB | PORTB_LED) & (~PORTB_BUTTON);
-	DDRD |= PORTD_BUZZER;
+	DDRD |= PORTD_BUZZER | PORTD_LEDR | PORTD_LEDG | PORTD_LEDY;
 
 	/* Enable pullup on button */
 	PORTB |= PORTB_BUTTON;
@@ -158,6 +162,32 @@ void beep(void)
 	PORTD &= ~PORTD_BUZZER;
 }
 
+/* Switch ON / OFF external LEDR */
+void switch_ledr(bool on) {
+	if (on) {
+		PORTD |= PORTD_LEDR;
+	} else {
+		PORTD &= ~PORTD_LEDR;
+	}
+}
+
+/* Switch ON / OFF external LEDG */
+void switch_ledg(bool on) {
+	if (on) {
+		PORTD |= PORTD_LEDG;
+	} else {
+		PORTD &= ~PORTD_LEDG;
+	}
+}
+
+/* Switch ON / OFF external LEDY */
+void switch_ledy(bool on) {
+	if (on) {
+		PORTD |= PORTD_LEDY;
+	} else {
+		PORTD &= ~PORTD_LEDY;
+	}
+}
 
 /*
  * Track the button presses during roughly 1 ms.
