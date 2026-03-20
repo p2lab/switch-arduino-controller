@@ -7,6 +7,8 @@
 #include "automation-utils.h"
 #include "user-io.h"
 
+#define HOLD_A_MS 3000
+
 /* Static functions */
 static void temporary_control(void);
 static void do_rng_manip(void);
@@ -64,6 +66,9 @@ void temporary_control(void)
 {
 	set_leds(NO_LEDS);
 	set_leds(TX_LED);
+	switch_ledr(0);
+	switch_ledg(0);
+	switch_ledy(0);
 
 	/* Allow the user to connect their controller back as controller 1 */
 	switch_controller(VIRT_TO_REAL);
@@ -99,18 +104,20 @@ static void do_rng_manip(void)
 	send_update(BT_H, DP_NEUTRAL, S_NEUTRAL, S_NEUTRAL);
 	send_update(BT_NONE, DP_NEUTRAL, S_NEUTRAL, S_NEUTRAL);
 
-	_delay_ms(2000);
+	_delay_ms(6000);
 
 	// Press A to launch the game again
 	send_update(BT_A, DP_NEUTRAL, S_NEUTRAL, S_NEUTRAL);
 	send_update(BT_NONE, DP_NEUTRAL, S_NEUTRAL, S_NEUTRAL);
 	
 	_delay_ms(32279); // first timer
-	send_update(BT_A, DP_NEUTRAL, S_NEUTRAL, S_NEUTRAL);
-	send_update(BT_NONE, DP_NEUTRAL, S_NEUTRAL, S_NEUTRAL);
 	switch_ledr(1);
+	SEND_BUTTON_SEQUENCE(
+		{ BT_A,			DP_NEUTRAL,	SEQ_HOLD,	74 },	/* Hold till we see continue screen */
+		{ BT_NONE,		DP_NEUTRAL,	SEQ_HOLD,	1  },	/* Wait for the main menu */
+	);
 
-	_delay_ms(24946); // second timer
+	_delay_ms(24946-HOLD_A_MS); // second timer
 	send_update(BT_A, DP_NEUTRAL, S_NEUTRAL, S_NEUTRAL);
 	send_update(BT_NONE, DP_NEUTRAL, S_NEUTRAL, S_NEUTRAL);
 	switch_ledg(1);
