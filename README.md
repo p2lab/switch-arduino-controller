@@ -9,17 +9,11 @@ controller, to read the state of a physical button connected between the
 Arduino’s pins 12 and ground, and to control the Arduino’s on-board LED as well
 as an external buzzer.
 
-Pokémon Sword/Shield automation
--------------------------------
+Pokémon FireRed/LeafGreen automation
+------------------------------------
 
-A sample program is provided to automate some tasks in Pokémon Sword/Shield.
-Details about this can be found in [this file](src/swsh/README.md).
-
-Pokémon Brilliant Diamond/Shining Pearl automation
---------------------------------------------------
-
-A sample program is provided to automate some tasks in Pokémon BD/SP.
-Details about this can be found in [this file](src/bdsp/README.md).
+A sample program is provided to automate some tasks in Pokémon FireRed/LeafGreen.
+Details about this can be found in [this file](src/frlg/README.md).
 
 How does it work?
 -----------------
@@ -74,9 +68,6 @@ Required hardware
    be tested. (Note: DFU programming may also stop working once this program is
    flashed onto the Arduino, so you should not attempt it if you do not have
    access to an external programmer)
- - A buzzer can be optionally attached between pins 2 and GND of the Arduino
-   board, in order for the automation process to notify the user when something
-   needs their attention.
 
 Required software
 -----------------
@@ -98,7 +89,7 @@ Building
 Running `make` will produce the following files:
  - `usb-iface.hex` is the program for the ATmega16U2 managing the USB
    interface.
- - `swsh.hex` is the Pokémon Sword/Shield automation program, running on the
+ - `frlg.hex` is the Pokémon FireRed/LeafGreen automation program, running on the
    ATmega328P. You can create your own automation program and edit the
    `Makefile` to build it.
 
@@ -122,7 +113,7 @@ bump into the top I/O header, making it a tight fit). Flash the `usb-iface.hex`
 file, either manually or by running `make flash-usb-iface`.
 
 Unplug the programmer and connect it to the main microcontroller’s ISCP header.
-Flash the `swsh.hex` file, either manually or by running `make flash-swsh`.
+Flash the `frlg.hex` file, either manually or by running `make flash-frlg`.
 
 Use any programmer supported by avrdude, `avrdude -c ?`, by specifying
 `PROGRAMMER` when flashing. E.g. `make PROGRAMMER=usbtiny flash-swsh`.
